@@ -1,8 +1,4 @@
 
-#
-# A set of data structures to represent dgraphs - two weight parameters per edge.
-#
-
 class Node(object):
     """Represents a node in the graph"""
     def __init__(self, name):
@@ -80,7 +76,7 @@ class Digraph(object):
             for edge in edges:
                 edge_strs.append(str(edge))
         edge_strs = sorted(edge_strs)  # sort alphabetically
-        return '\n'.join(edge_strs)  # concat edge_strs with "\n"s between them
+        return '\n'.join(edge_strs)  
 
     def get_edges_for_node(self, node):
         return self.edges[node]
