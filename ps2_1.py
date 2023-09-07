@@ -1,28 +1,8 @@
 
-#
-# Pathfinder for digraphs with two weight-parameters per edge.
-#
 from graph_1 import Digraph, Node, WeightedEdge
 test_map_filename = "testing_graph.txt"
 
 def load_map(map_filename):
-    """
-    Parses the map file and constructs a directed graph
-
-    Parameters:
-        map_filename : name of the map file
-
-    Assumes:
-        Each entry in the map file consists of the following four positive
-        integers, separated by a blank space:
-            From To TotalDistance DistanceOutdoors
-        e.g.
-            32 76 54 23
-        This entry would become an edge from 32 to 76.
-
-    Returns:
-        a Digraph representing the map
-    """
     digraph_mit = Digraph()
     file = open(map_filename, "r", encoding="utf-8")
     list = []
@@ -74,7 +54,7 @@ def distance_sum(digraph, path):
 
 def generate_paths(digraph, start, end, path = None):
     """
-    Uses DFS to generate all possible paths from a start node to an end node.
+    Uses DFS to generate all possible paths from a start node to end node.
     :param digraph: The digraph in question.
     :param start: The starting node.
     :param end: The end node.
@@ -92,33 +72,6 @@ def generate_paths(digraph, start, end, path = None):
                                       path + [edge.get_destination().get_name()])
 
 def directed_dfs(digraph, start, end, max_total_dist, max_dist_outdoors):
-    """
-    Finds the shortest path from start to end using a directed depth-first
-    search. The total distance traveled on the path must not
-    exceed max_total_dist, and the distance spent outdoors on this path must
-    not exceed max_dist_outdoors.
-
-    Parameters:
-        digraph: Digraph instance
-            The graph on which to carry out the search
-        start: string
-            Building number at which to start
-        end: string
-            Building number at which to end
-        max_total_dist: int
-            Maximum total distance on a path
-        max_dist_outdoors: int
-            Maximum distance spent outdoors on a path
-
-    Returns:
-        The shortest-path from start to end, represented by
-        a list of building numbers (in strings), [n_1, n_2, ..., n_k],
-        where there exists an edge from n_i to n_(i+1) in digraph,
-        for all 1 <= i < k
-
-        If there exists no path that satisfies max_total_dist and
-        max_dist_outdoors constraints, then raises a ValueError.
-    """
     if (not digraph.has_node(get_node_object(digraph, start))) and \
             (not digraph.has_node(get_node_object(digraph, end))):
         raise ValueError("Startnode or Endnode does not exist in this graph.")
@@ -141,10 +94,7 @@ print(directed_dfs(test_graph, "1", "5", 100000, 10000))
 
 
 
-# ================================================================
-# Begin tests -- you do not need to modify anything below this line
-# ================================================================
-
+# TESTS 
 # class Ps2Test(unittest.TestCase):
 #     LARGE_DIST = 99999
 #
